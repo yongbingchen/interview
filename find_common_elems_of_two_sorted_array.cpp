@@ -20,17 +20,17 @@ private:
 	template <typename iterator>
 	void find_common(iterator l_start, iterator l_end, iterator s_start, iterator s_end, vector <int> &result)
 	{
+		if (l_start == l_end || s_start == s_end)
+			return;
+
 		if (next(s_start) == s_end) {
 			if (find(l_start, l_end, *s_start) != l_end)
 				result.push_back(*s_start);
 			return;
 		}
 
-		if (l_start == l_end)
-			return;
-
-		iterator s_mid = s_start + distance(s_start, s_end) / 2;
-		iterator l_mid = lower_bound(l_start, l_end, *s_mid);
+		iterator l_mid = l_start + distance(l_start, l_end) / 2;
+		iterator s_mid = lower_bound(s_start, s_end, *l_mid);
 		find_common(l_start, l_mid, s_start, s_mid, result);
 		find_common(l_mid, l_end, s_mid, s_end, result);
 	}
