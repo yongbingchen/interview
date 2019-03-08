@@ -17,19 +17,12 @@ struct node {
 	{}
 };
 
-class my_greater {
-	public:
-		bool operator () (node &a, node &b)
-		{
-			return a.dist > b.dist;
-		}
-};
-
 class solution {
 	public:
 		bool astar(board &matrix)
 		{
-			priority_queue <node, vector <node>, my_greater> pq;
+			auto my_greater = [] (const node &a, const node &b) -> bool { return a.dist > b.dist; };
+			priority_queue <node, vector <node>, decltype(my_greater)> pq(my_greater);
 			unordered_map <string, bool> visited;
 			pq.push(node(matrix, 0, 0));
 

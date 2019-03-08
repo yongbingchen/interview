@@ -24,7 +24,7 @@ private:
 			return;
 
 		if (next(s_start) == s_end) {
-			if (find(l_start, l_end, *s_start) != l_end)
+			if (lower_bound(l_start, l_end, *s_start) != l_end)
 				result.push_back(*s_start);
 			return;
 		}

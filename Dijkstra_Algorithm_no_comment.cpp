@@ -18,12 +18,6 @@ struct node {
 	{}
 };
 
-class my_greater {
-	public:
-		bool operator () (node &x, node &y)
-		{return x.dist > y.dist;}
-};
-
 class graph {
 	public:
 		graph(vector <edge> &edges, int v)
@@ -36,7 +30,8 @@ class graph {
 
 		void shortest_path(int start, vector <int> &dist, vector <int> &pred)
 		{
-			priority_queue <node, vector <node>, my_greater> pq;
+			auto my_greater = [] (const node &a, const node &b) { return a.dist > b.dist; };
+			priority_queue <node, vector <node>, decltype(my_greater)> pq(my_greater);
 			vector <bool> done(vertices, false);
 
 			dist[start] = 0;

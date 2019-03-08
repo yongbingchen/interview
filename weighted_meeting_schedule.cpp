@@ -13,17 +13,11 @@ struct meeting {
 	{}
 };
 
-class my_compare {
-	public:
-		bool operator () (meeting &a, meeting &b)
-		{ return a.start < b.start;}
-};
-
 class solution {
 	public:
 		int arrange(vector <meeting> &m, vector <meeting> &result)
 		{
-			sort(m.begin(), m.end(), my_compare());
+			sort(m.begin(), m.end(), [](meeting &a, meeting &b) { return a.start < b.start; });
 			int ret = arrange(m.begin(), m.end(), 0);
 			int curr = ret;
 			for (int i = 0; i < m.size(); i++) {
