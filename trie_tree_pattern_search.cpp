@@ -39,9 +39,9 @@ class trie {
 
 			}
 
-			 /*case 1: let '*' match curr char only*/
+			 /*case 1: let '*' match zero char*/
 			search(root, pattern, idx + 1, result);
-			/*case 2: let '*' match all curr char and their successor*/
+			/*case 2: let '*' match curr char, and keep matching on its child*/
 			for (auto &i : root->next) {
 				search(i, pattern, idx, result);
 			}
